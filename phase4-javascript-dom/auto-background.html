@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Background Color Changer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 1s ease;
+        }
+        .message {
+            background: rgba(255,255,255,0.85);
+            padding: 20px 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h2>Watch the background change!</h2>
+        <p id="colorLabel">Current color: --</p>
+    </div>
+ 
+    <script>
+        // Experiment 9: Use the DOM to change the page's background color
+        // automatically every 5 seconds.
+        const colors = ["#FFCDD2", "#C8E6C9", "#BBDEFB", "#FFF9C4", "#D1C4E9", "#FFE0B2"];
+        let index = 0;
+ 
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = colors[index];
+            document.getElementById("colorLabel").textContent = "Current color: " + colors[index];
+            index = (index + 1) % colors.length; // cycle back to the start
+        }
+ 
+        // Run once immediately, then repeat every 5000ms (5 seconds)
+        changeBackgroundColor();
+        setInterval(changeBackgroundColor, 5000);
+    </script>
+</body>
+</html>
+ 

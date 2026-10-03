@@ -1,0 +1,25 @@
+# Compiled Java classes
+*.class
+target/
+build/
+
+# Node / React
+node_modules/
+dist/
+.vite/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / secrets (never commit real passwords)
+application-local.properties
+*.env

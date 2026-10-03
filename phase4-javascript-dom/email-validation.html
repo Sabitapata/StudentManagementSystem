@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Email Validation</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); width: 320px; }
+        input { width: 100%; padding: 8px; margin-top: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; margin-top: 15px; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        #result { margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Email Validator</h2>
+        <input type="text" id="emailInput" placeholder="Enter your email">
+        <button onclick="validateEmail()">Check Email</button>
+        <p id="result"></p>
+    </div>
+ 
+    <script>
+        // Experiment 8: Validate email by checking for "@" and "." characters.
+        // If missing, alert the user and ask them to re-enter it.
+        function validateEmail() {
+            const email = document.getElementById("emailInput").value;
+            const resultEl = document.getElementById("result");
+ 
+            const hasAt = email.includes("@");
+            const hasDot = email.includes(".");
+ 
+            if (!hasAt || !hasDot) {
+                alert("Invalid email! It must contain both '@' and '.' characters. Please re-enter it.");
+                resultEl.textContent = "";
+                document.getElementById("emailInput").value = "";
+                document.getElementById("emailInput").focus();
+                return;
+            }
+ 
+            resultEl.style.color = "green";
+            resultEl.textContent = "Valid email format: " + email;
+        }
+    </script>
+</body>
+</html>
+ 
