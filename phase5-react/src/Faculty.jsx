@@ -8,8 +8,8 @@ function Faculty() {
   const [newFaculty, setNewFaculty] = useState({
     name: '',
     email: '',
-    department: 'Computer Science',
-    role: 'Assistant Professor',
+    department: 'Mathematics Wing',
+    role: 'Senior Subject Teacher',
     courses: ''
   });
 
@@ -34,8 +34,8 @@ function Faculty() {
     setNewFaculty({
       name: '',
       email: '',
-      department: 'Computer Science',
-      role: 'Assistant Professor',
+      department: 'Mathematics Wing',
+      role: 'Senior Subject Teacher',
       courses: ''
     });
     setIsModalOpen(false);
@@ -49,75 +49,73 @@ function Faculty() {
 
   return (
     <div className="page-container">
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">Faculty Directory</h1>
-          <p className="page-subtitle">
-            Meet the academic mentors, professors, and instructors guiding your specialization.
-          </p>
+      <div className="school-section-header">
+        <div className="header-title-box">
+          <div className="header-crest-icon">👨‍🏫</div>
+          <div>
+            <h1 className="school-page-title">Teaching Faculty &amp; Staff</h1>
+            <p className="school-page-subtitle">
+              Distinguished educators, department heads, and academic mentors of Greenwood Academy.
+            </p>
+          </div>
         </div>
-        <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-            <line x1="12" y1="5" x2="12" y2="19"/>
-            <line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-          Add Faculty
+        <button className="btn btn-school-primary" onClick={() => setIsModalOpen(true)}>
+          <span>➕</span> Add Faculty Member
         </button>
       </div>
 
-      <div className="controls-panel">
+      <div className="school-controls-panel">
         <div className="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="search-icon">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
+          <span className="school-search-icon">🔍</span>
           <input
             type="text"
             placeholder="Search faculty by name, department, or email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="search-input"
+            className="school-search-input"
           />
         </div>
       </div>
 
-      <div className="meta-bar">
+      <div className="school-meta-bar">
         <span className="results-count">
-          Showing <strong>{filteredFaculty.length}</strong> academic faculty members
+          Showing <strong>{filteredFaculty.length}</strong> academic faculty educators
         </span>
       </div>
 
       <div className="faculty-grid">
         {filteredFaculty.map((f) => (
-          <div key={f.id} className="faculty-card">
-            <div className="faculty-badge-icon">
-              👨‍🏫
-            </div>
-            <h3 className="faculty-name">{f.name}</h3>
-            <span className="faculty-role">{f.role || 'Faculty Member'}</span>
-
-            <div className="faculty-detail">
-              <span className="detail-label">Department</span>
-              <span className="dept-tag dept-ds">{f.department}</span>
-            </div>
-
-            <div className="faculty-detail">
-              <span className="detail-label">Contact</span>
-              <a href={`mailto:${f.email}`} className="card-email">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-                {f.email}
-              </a>
+          <div key={f.id} className="school-faculty-card">
+            <div className="faculty-card-header">
+              <div className="faculty-avatar-circle">
+                👨‍🏫
+              </div>
+              <div className="faculty-title-group">
+                <h3 className="faculty-name">{f.name}</h3>
+                <span className="faculty-role-pill">{f.role || 'Senior Teacher'}</span>
+              </div>
             </div>
 
-            <div className="faculty-courses">
-              <span className="detail-label">Courses Assigned:</span>
-              <div className="course-chips">
-                {(f.courses || []).map((course, idx) => (
-                  <span key={idx} className="chip">{course}</span>
-                ))}
+            <div className="faculty-body-details">
+              <div className="faculty-row">
+                <span className="f-label">Department / Wing:</span>
+                <span className="f-wing-tag">{f.department}</span>
+              </div>
+
+              <div className="faculty-row">
+                <span className="f-label">Official Email:</span>
+                <a href={`mailto:${f.email}`} className="f-email">
+                  📧 {f.email}
+                </a>
+              </div>
+
+              <div className="faculty-row subjects-row">
+                <span className="f-label">Assigned Classes &amp; Subjects:</span>
+                <div className="faculty-chips-wrap">
+                  {(f.courses || []).map((course, idx) => (
+                    <span key={idx} className="subject-chip">📖 {course}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -126,20 +124,24 @@ function Faculty() {
 
       {isModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Add Faculty Member</h2>
+          <div className="school-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="school-modal-header">
+              <div className="modal-crest">👨‍🏫</div>
+              <div>
+                <h2>Add Faculty Member</h2>
+                <p>Staff Onboarding &bull; Greenwood Academy</p>
+              </div>
               <button className="modal-close" onClick={() => setIsModalOpen(false)}>&times;</button>
             </div>
 
             <form onSubmit={handleAddFaculty}>
               <div className="modal-body">
                 <div className="form-group">
-                  <label htmlFor="faculty-name">Full Name *</label>
+                  <label htmlFor="faculty-name">Educator Full Name *</label>
                   <input
                     id="faculty-name"
                     type="text"
-                    placeholder="e.g. Dr. Rajesh Rao"
+                    placeholder="e.g. Dr. R. Sharma"
                     value={newFaculty.name}
                     onChange={(e) => setNewFaculty({ ...newFaculty, name: e.target.value })}
                     required
@@ -147,11 +149,11 @@ function Faculty() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="faculty-email">Email Address *</label>
+                  <label htmlFor="faculty-email">School Email Address *</label>
                   <input
                     id="faculty-email"
                     type="email"
-                    placeholder="e.g. rajesh@college.edu"
+                    placeholder="e.g. r.sharma@greenwood.edu"
                     value={newFaculty.email}
                     onChange={(e) => setNewFaculty({ ...newFaculty, email: e.target.value })}
                     required
@@ -160,17 +162,17 @@ function Faculty() {
 
                 <div className="form-row">
                   <div className="form-group flex-1">
-                    <label htmlFor="faculty-dept">Department *</label>
+                    <label htmlFor="faculty-dept">Academic Wing *</label>
                     <select
                       id="faculty-dept"
                       value={newFaculty.department}
                       onChange={(e) => setNewFaculty({ ...newFaculty, department: e.target.value })}
                     >
-                      <option value="Computer Science">Computer Science</option>
-                      <option value="Data Science">Data Science</option>
-                      <option value="Artificial Intelligence">Artificial Intelligence</option>
-                      <option value="Information Technology">Information Technology</option>
-                      <option value="Cyber Security">Cyber Security</option>
+                      <option value="Mathematics Wing">Mathematics Wing</option>
+                      <option value="Science Wing">Science Wing</option>
+                      <option value="Languages Wing">Languages Wing</option>
+                      <option value="Computer Wing">Computer Wing</option>
+                      <option value="Social Studies Wing">Social Studies Wing</option>
                     </select>
                   </div>
 
@@ -179,7 +181,7 @@ function Faculty() {
                     <input
                       id="faculty-role"
                       type="text"
-                      placeholder="e.g. Professor"
+                      placeholder="e.g. Head of Department"
                       value={newFaculty.role}
                       onChange={(e) => setNewFaculty({ ...newFaculty, role: e.target.value })}
                     />
@@ -187,11 +189,11 @@ function Faculty() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="faculty-courses">Courses Taught (comma separated)</label>
+                  <label htmlFor="faculty-courses">Subjects Taught (comma separated)</label>
                   <input
                     id="faculty-courses"
                     type="text"
-                    placeholder="e.g. Machine Learning, Deep Learning"
+                    placeholder="e.g. Algebra, Trigonometry, Calculus"
                     value={newFaculty.courses}
                     onChange={(e) => setNewFaculty({ ...newFaculty, courses: e.target.value })}
                   />
@@ -202,8 +204,8 @@ function Faculty() {
                 <button type="button" className="btn btn-secondary" onClick={() => setIsModalOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
-                  Save Faculty
+                <button type="submit" className="btn btn-school-primary">
+                  Save Faculty Record
                 </button>
               </div>
             </form>

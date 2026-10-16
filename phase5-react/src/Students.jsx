@@ -2,20 +2,23 @@ import { useState, useEffect } from 'react';
 import StudentCard from './StudentCard';
 import { fetchStudents, createStudentApi, updateStudentApi, deleteStudentApi, resetAllData } from './api';
 
-const DEPARTMENTS = [
-  'All Departments',
-  'Data Science',
-  'Computer Science',
-  'Artificial Intelligence',
-  'Information Technology',
-  'Cyber Security'
+const SCHOOL_CLASSES = [
+  'All Classes',
+  'Class 10-A (Science)',
+  'Class 10-B (General)',
+  'Class 11-A (Mathematics)',
+  'Class 12-A (Physics & AI)',
+  'Class 12-B (Computer Sci)',
+  'Class 9-A (Foundation)'
 ];
+
+const HOUSES = ['Sapphire House', 'Ruby House', 'Emerald House', 'Topaz House'];
 
 function Students({ isConnected }) {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDept, setSelectedDept] = useState('All Departments');
+  const [selectedClass, setSelectedClass] = useState('All Classes');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'table'
 
   // Modal states
@@ -27,7 +30,9 @@ function Students({ isConnected }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    department: 'Data Science',
+    department: 'Class 10-A (Science)',
+    rollNo: '',
+    house: 'Sapphire House',
     password: ''
   });
   const [formError, setFormError] = useState('');
@@ -49,7 +54,7 @@ function Students({ isConnected }) {
       setStudents(data);
     } catch (err) {
       console.error(err);
-      showToast('Error loading students', 'error');
+      showToast('Error loading student roster', 'error');
     } finally {
       setLoading(false);
     }
@@ -59,13 +64,15 @@ function Students({ isConnected }) {
     loadData();
   }, [isConnected]);
 
-  // Open modal for Create
+  // Open modal for Admission
   const handleOpenCreateModal = () => {
     setEditingStudent(null);
     setFormData({
       name: '',
       email: '',
-      department: 'Data Science',
+      department: 'Class 10-A (Science)',
+      rollNo: `GW-${Math.floor(1000 + Math.random() * 9000)}`,
+      house: 'Sapphire House',
       password: ''
     });
     setFormError('');
@@ -78,7 +85,9 @@ function Students({ isConnected }) {
     setFormData({
       name: student.name || '',
       email: student.email || '',
-      department: student.department || 'Data Science',
+      department: student.department || 'Class 10-A (Science)',
+      rollNo: student.rollNo || `GW-${String(student.id).padStart(4, '0')}`,
+      house: student.house || 'Sapphire House',
       password: student.password || ''
     });
     setFormError('');
@@ -96,11 +105,11 @@ function Students({ isConnected }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
-      setFormError('Student name is required.');
+      setFormError('Student full name is required.');
       return;
     }
     if (!formData.email.trim() || !formData.email.includes('@') || !formData.email.includes('.')) {
-      setFormError('Please enter a valid email address containing @ and .');
+      setFormError('Please enter a valid school email address (must include @ and .).');
       return;
     }
 
@@ -111,26 +120,30 @@ function Students({ isConnected }) {
           name: formData.name.trim(),
           email: formData.email.trim(),
           department: formData.department,
+          rollNo: formData.rollNo,
+          house: formData.house,
           password: formData.password || editingStudent.password || 'password123'
         };
         await updateStudentApi(editingStudent.id, payload, isConnected);
-        showToast(`Student "${formData.name}" updated successfully!`);
+        showToast(`Scholar "${formData.name}" records updated successfully!`);
       } else {
         // Create
         const payload = {
           name: formData.name.trim(),
           email: formData.email.trim(),
           department: formData.department,
+          rollNo: formData.rollNo || `GW-${Math.floor(1000 + Math.random() * 9000)}`,
+          house: formData.house || 'Sapphire House',
           password: formData.password || 'password123'
         };
         await createStudentApi(payload, isConnected);
-        showToast(`Student "${formData.name}" added successfully!`);
+        showToast(`Student "${formData.name}" enrolled successfully!`);
       }
       handleCloseModal();
       await loadData();
     } catch (err) {
       console.error(err);
-      setFormError('Failed to save student record.');
+      setFormError('Failed to save student admission record.');
     }
   };
 
@@ -139,7 +152,7 @@ function Students({ isConnected }) {
     if (!deleteCandidate) return;
     try {
       await deleteStudentApi(deleteCandidate.id, isConnected);
-      showToast(`Student "${deleteCandidate.name}" removed successfully.`, 'info');
+      showToast(`Student "${deleteCandidate.name}" removed from school records.`, 'info');
       setDeleteCandidate(null);
       await loadData();
     } catch (err) {
@@ -150,28 +163,28 @@ function Students({ isConnected }) {
 
   // Reset demo data
   const handleResetData = () => {
-    if (window.confirm('Reset student records to initial sample data?')) {
+    if (window.confirm('Restore initial school student roster?')) {
       resetAllData();
       loadData();
-      showToast('Sample student data restored.');
+      showToast('School student sample roster restored.');
     }
   };
 
   // Export CSV
   const handleExportCSV = () => {
     if (students.length === 0) return;
-    const headers = 'ID,Name,Department,Email\n';
+    const headers = 'Roll No,ID,Full Name,Class & Section,School Email,House\n';
     const rows = students
-      .map(s => `${s.id},"${s.name}","${s.department}","${s.email}"`)
+      .map(s => `"${s.rollNo || 'GW-' + s.id}",${s.id},"${s.name}","${s.department}","${s.email}","${s.house || 'General'}"`)
       .join('\n');
     const blob = new Blob([headers + rows], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `students_export_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `Greenwood_Students_Roster_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    showToast('Student records exported as CSV.');
+    showToast('Student roster exported as CSV.');
   };
 
   // Filter students
@@ -179,13 +192,14 @@ function Students({ isConnected }) {
     const matchesSearch =
       (student.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
       (student.email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (student.department || '').toLowerCase().includes(searchQuery.toLowerCase());
+      (student.department || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (student.rollNo || '').toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesDept =
-      selectedDept === 'All Departments' ||
-      (student.department || '').toLowerCase() === selectedDept.toLowerCase();
+    const matchesClass =
+      selectedClass === 'All Classes' ||
+      (student.department || '').toLowerCase() === selectedClass.toLowerCase();
 
-    return matchesSearch && matchesDept;
+    return matchesSearch && matchesClass;
   });
 
   return (
@@ -194,52 +208,43 @@ function Students({ isConnected }) {
       {toast && (
         <div className={`toast-notification ${toast.type}`}>
           <div className="toast-icon">
-            {toast.type === 'error' ? '❌' : toast.type === 'info' ? 'ℹ️' : '✅'}
+            {toast.type === 'error' ? '❌' : toast.type === 'info' ? 'ℹ️' : '🎓'}
           </div>
           <span>{toast.message}</span>
         </div>
       )}
 
       {/* Header bar */}
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">Student Directory</h1>
-          <p className="page-subtitle">
-            Manage student registrations, academic departments, and profile information with full CRUD operations.
-          </p>
+      <div className="school-section-header">
+        <div className="header-title-box">
+          <div className="header-crest-icon">🎒</div>
+          <div>
+            <h1 className="school-page-title">Student Admissions &amp; Roster</h1>
+            <p className="school-page-subtitle">
+              Manage student registrations, academic classes, assigned houses, and contact profiles.
+            </p>
+          </div>
         </div>
         <div className="header-actions">
-          <button className="btn btn-outline" onClick={handleExportCSV} title="Download CSV">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Export CSV
+          <button className="btn btn-school-outline" onClick={handleExportCSV} title="Download Student List CSV">
+            📥 Export Roster CSV
           </button>
-          <button className="btn btn-primary" onClick={handleOpenCreateModal}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-            Add Student
+          <button className="btn btn-school-primary" onClick={handleOpenCreateModal}>
+            <span>➕</span> New Admission
           </button>
         </div>
       </div>
 
       {/* Filter & Controls Panel */}
-      <div className="controls-panel">
+      <div className="school-controls-panel">
         <div className="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="search-icon">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
+          <span className="school-search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Search by name, email, or department..."
+            placeholder="Search scholar by name, roll no, class, or email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
+            className="school-search-input"
           />
           {searchQuery && (
             <button className="clear-btn" onClick={() => setSearchQuery('')} aria-label="Clear search">
@@ -248,14 +253,14 @@ function Students({ isConnected }) {
           )}
         </div>
 
-        <div className="filter-controls">
+        <div className="school-filter-group">
           <select
-            value={selectedDept}
-            onChange={(e) => setSelectedDept(e.target.value)}
-            className="select-dropdown"
+            value={selectedClass}
+            onChange={(e) => setSelectedClass(e.target.value)}
+            className="school-select"
           >
-            {DEPARTMENTS.map(d => (
-              <option key={d} value={d}>{d}</option>
+            {SCHOOL_CLASSES.map(cls => (
+              <option key={cls} value={cls}>{cls}</option>
             ))}
           </select>
 
@@ -263,40 +268,28 @@ function Students({ isConnected }) {
             <button
               className={`toggle-btn ${viewMode === 'grid' ? 'active' : ''}`}
               onClick={() => setViewMode('grid')}
-              title="Card Grid View"
+              title="Student ID Cards View"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-                <rect x="3" y="3" width="7" height="7"/>
-                <rect x="14" y="3" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/>
-              </svg>
+              🆔 Cards
             </button>
             <button
               className={`toggle-btn ${viewMode === 'table' ? 'active' : ''}`}
               onClick={() => setViewMode('table')}
-              title="Data Table View"
+              title="Class Register Table View"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
-                <line x1="8" y1="6" x2="21" y2="6"/>
-                <line x1="8" y1="12" x2="21" y2="12"/>
-                <line x1="8" y1="18" x2="21" y2="18"/>
-                <line x1="3" y1="6" x2="3.01" y2="6"/>
-                <line x1="3" y1="12" x2="3.01" y2="12"/>
-                <line x1="3" y1="18" x2="3.01" y2="18"/>
-              </svg>
+              📋 Register
             </button>
           </div>
         </div>
       </div>
 
       {/* Meta Counter Bar */}
-      <div className="meta-bar">
+      <div className="school-meta-bar">
         <span className="results-count">
-          Showing <strong>{filteredStudents.length}</strong> of <strong>{students.length}</strong> registered students
+          Enrolled: <strong>{filteredStudents.length}</strong> of <strong>{students.length}</strong> registered students
         </span>
-        <button className="text-btn" onClick={handleResetData} title="Restore initial students">
-          Reset Sample Data
+        <button className="text-btn" onClick={handleResetData} title="Restore standard sample roster">
+          Reset School Roster
         </button>
       </div>
 
@@ -304,19 +297,19 @@ function Students({ isConnected }) {
       {loading ? (
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Loading student records...</p>
+          <p>Accessing school registry database...</p>
         </div>
       ) : filteredStudents.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">🔍</div>
-          <h3>No students match your criteria</h3>
-          <p>Try searching for a different keyword or department filter, or add a new student.</p>
-          <button className="btn btn-primary" onClick={handleOpenCreateModal}>
-            Add First Student
+          <div className="empty-icon">🎒</div>
+          <h3>No students found for this class or search criteria</h3>
+          <p>Try searching with another keyword or admit a new student into the school roster.</p>
+          <button className="btn btn-school-primary" onClick={handleOpenCreateModal}>
+            Admit New Student
           </button>
         </div>
       ) : viewMode === 'grid' ? (
-        <div className="students-grid">
+        <div className="students-id-grid">
           {filteredStudents.map((student) => (
             <StudentCard
               key={student.id}
@@ -327,32 +320,38 @@ function Students({ isConnected }) {
           ))}
         </div>
       ) : (
-        <div className="table-responsive">
-          <table className="data-table">
+        <div className="school-table-container">
+          <table className="school-data-table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Roll No</th>
                 <th>Student Name</th>
-                <th>Department</th>
-                <th>Email Address</th>
+                <th>Class &amp; Section</th>
+                <th>School House</th>
+                <th>Contact Email</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.map((student) => (
                 <tr key={student.id}>
-                  <td><span className="badge-id">#{String(student.id).padStart(3, '0')}</span></td>
-                  <td className="table-name">{student.name}</td>
-                  <td>
-                    <span className="dept-pill">{student.department}</span>
+                  <td><span className="roll-badge">{student.rollNo || `GW-${String(student.id).padStart(4, '0')}`}</span></td>
+                  <td className="table-student-name">
+                    <strong>{student.name}</strong>
                   </td>
                   <td>
-                    <a href={`mailto:${student.email}`} className="table-link">{student.email}</a>
+                    <span className="class-chip">{student.department}</span>
+                  </td>
+                  <td>
+                    <span className="house-tag">{student.house || 'Sapphire'}</span>
+                  </td>
+                  <td>
+                    <a href={`mailto:${student.email}`} className="school-table-link">{student.email}</a>
                   </td>
                   <td>
                     <div className="table-actions">
                       <button className="btn-sm btn-edit" onClick={() => handleOpenEditModal(student)}>Edit</button>
-                      <button className="btn-sm btn-delete" onClick={() => setDeleteCandidate(student)}>Delete</button>
+                      <button className="btn-sm btn-delete" onClick={() => setDeleteCandidate(student)}>Remove</button>
                     </div>
                   </td>
                 </tr>
@@ -362,12 +361,16 @@ function Students({ isConnected }) {
         </div>
       )}
 
-      {/* Add / Edit Modal */}
+      {/* Admission / Edit Modal */}
       {isModalOpen && (
         <div className="modal-backdrop" onClick={handleCloseModal}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>{editingStudent ? 'Edit Student' : 'Add New Student'}</h2>
+          <div className="school-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="school-modal-header">
+              <div className="modal-crest">🎓</div>
+              <div>
+                <h2>{editingStudent ? 'Edit Student Details' : 'Student Admission Form'}</h2>
+                <p>Greenwood Academy &bull; Academic Year 2026-27</p>
+              </div>
               <button className="modal-close" onClick={handleCloseModal}>&times;</button>
             </div>
 
@@ -376,11 +379,11 @@ function Students({ isConnected }) {
                 {formError && <div className="form-error-banner">{formError}</div>}
 
                 <div className="form-group">
-                  <label htmlFor="student-name">Full Name *</label>
+                  <label htmlFor="student-name">Scholar Full Name *</label>
                   <input
                     id="student-name"
                     type="text"
-                    placeholder="e.g. Alice Walker"
+                    placeholder="e.g. Aarav Sharma"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -388,12 +391,38 @@ function Students({ isConnected }) {
                   />
                 </div>
 
+                <div className="form-row">
+                  <div className="form-group flex-1">
+                    <label htmlFor="student-roll">Roll / Admission Number</label>
+                    <input
+                      id="student-roll"
+                      type="text"
+                      placeholder="e.g. GW-1045"
+                      value={formData.rollNo}
+                      onChange={(e) => setFormData({ ...formData, rollNo: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-group flex-1">
+                    <label htmlFor="student-house">School House</label>
+                    <select
+                      id="student-house"
+                      value={formData.house}
+                      onChange={(e) => setFormData({ ...formData, house: e.target.value })}
+                    >
+                      {HOUSES.map(h => (
+                        <option key={h} value={h}>{h}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
                 <div className="form-group">
-                  <label htmlFor="student-email">Email Address *</label>
+                  <label htmlFor="student-email">Student / Parent Email Address *</label>
                   <input
                     id="student-email"
                     type="email"
-                    placeholder="e.g. alice@college.edu"
+                    placeholder="e.g. aarav.s@greenwood.edu"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
@@ -401,24 +430,25 @@ function Students({ isConnected }) {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="student-department">Academic Department *</label>
+                  <label htmlFor="student-class">Assigned Class / Grade *</label>
                   <select
-                    id="student-department"
+                    id="student-class"
                     value={formData.department}
                     onChange={(e) => setFormData({ ...formData, department: e.target.value })}
                   >
-                    <option value="Data Science">Data Science</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Artificial Intelligence">Artificial Intelligence</option>
-                    <option value="Information Technology">Information Technology</option>
-                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Class 10-A (Science)">Class 10-A (Science)</option>
+                    <option value="Class 10-B (General)">Class 10-B (General)</option>
+                    <option value="Class 11-A (Mathematics)">Class 11-A (Mathematics)</option>
+                    <option value="Class 12-A (Physics & AI)">Class 12-A (Physics & AI)</option>
+                    <option value="Class 12-B (Computer Sci)">Class 12-B (Computer Sci)</option>
+                    <option value="Class 9-A (Foundation)">Class 9-A (Foundation)</option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="student-password">Password {editingStudent ? '(Leave blank to keep current)' : '(Optional)'}</label>
+                  <label htmlFor="student-pass">Portal Password {editingStudent ? '(Leave blank to retain current)' : '(Default: password123)'}</label>
                   <input
-                    id="student-password"
+                    id="student-pass"
                     type="password"
                     placeholder="Set student login password"
                     value={formData.password}
@@ -431,8 +461,8 @@ function Students({ isConnected }) {
                 <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
-                  {editingStudent ? 'Save Changes' : 'Create Student'}
+                <button type="submit" className="btn btn-school-primary">
+                  {editingStudent ? 'Save Records' : 'Confirm Admission'}
                 </button>
               </div>
             </form>
@@ -443,18 +473,18 @@ function Students({ isConnected }) {
       {/* Delete Confirmation Modal */}
       {deleteCandidate && (
         <div className="modal-backdrop" onClick={() => setDeleteCandidate(null)}>
-          <div className="modal-card modal-confirm" onClick={(e) => e.stopPropagation()}>
+          <div className="school-modal-card modal-confirm" onClick={(e) => e.stopPropagation()}>
             <div className="confirm-icon">⚠️</div>
-            <h2>Confirm Removal</h2>
+            <h2>Confirm Student De-registration</h2>
             <p>
-              Are you sure you want to delete student <strong>"{deleteCandidate.name}"</strong> (ID: #{deleteCandidate.id})? This action cannot be undone.
+              Are you sure you want to withdraw <strong>"{deleteCandidate.name}"</strong> (Roll No: {deleteCandidate.rollNo || deleteCandidate.id}) from the official school roll?
             </p>
             <div className="modal-footer justify-center">
               <button className="btn btn-secondary" onClick={() => setDeleteCandidate(null)}>
                 Cancel
               </button>
               <button className="btn btn-danger" onClick={handleDeleteConfirm}>
-                Yes, Delete Student
+                Withdraw Student
               </button>
             </div>
           </div>

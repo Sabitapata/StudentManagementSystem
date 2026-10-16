@@ -1,61 +1,62 @@
 function About() {
   const syllabusOutcomes = [
-    { code: 'LO1', name: 'Java Programming & OOP Fundamentals', details: 'Core syntax, classes, objects, access modifiers, constructors, and encapsulation.' },
-    { code: 'LO2', name: 'Inheritance & Custom Exception Handling', details: 'Person superclass, specialized Student and Faculty subclasses, and InvalidEnrollmentException.' },
-    { code: 'LO3', name: 'Client & Server-Side Programming', details: 'Java Servlets handling HTTP GET/POST, session authentication, and Apache Tomcat 10 deployment.' },
-    { code: 'LO4', name: 'JavaScript for Interactive Web Development', details: 'DOM manipulation, dynamic style changing, form validation, and event handling.' },
-    { code: 'LO5', name: 'React Framework for Modern Web Apps', details: 'Single Page Application (SPA), useState, useEffect, React Router v7, and modular component hierarchy.' },
-    { code: 'LO6', name: 'Spring Boot for Enterprise Web Services', details: 'Spring Data JPA, Hibernate ORM, REST Controller endpoints, and MySQL database persistence.' },
+    { code: 'LO1', name: 'Java OOP Fundamentals', details: 'Domain modeling for School: Person superclass, Student and Faculty subclasses, encapsulation of academic data.' },
+    { code: 'LO2', name: 'Inheritance & Custom Exception Handling', details: 'Hierarchy with InvalidEnrollmentException when school grades or admission bounds are violated.' },
+    { code: 'LO3', name: 'Client & Server-Side Programming', details: 'School portal login & staff verification via Java Servlets and JSP deployed on Apache Tomcat 10.' },
+    { code: 'LO4', name: 'JavaScript DOM Manipulation', details: 'Client-side email verification, dynamic noticeboards, and school portal tab navigation.' },
+    { code: 'LO5', name: 'React 19 Single Page App', details: 'Rich school portal interface, reactive admissions roster, subject tracking, and state persistence.' },
+    { code: 'LO6', name: 'Spring Boot REST Microservices', details: 'Enterprise backend managing student MySQL persistence with Spring Data JPA and Hibernate ORM.' },
   ];
 
   const dbTables = [
-    { name: 'students', fields: 'id (PK), name, email (UQ), password, department', role: 'Stores student credentials and academic department' },
-    { name: 'faculty', fields: 'id (PK), name, email (UQ), password, department', role: 'Faculty instructors credentials and departments' },
-    { name: 'courses', fields: 'id (PK), name, credits, faculty_id (FK)', role: 'Curriculum catalog linked to instructor' },
-    { name: 'enrollments', fields: 'id (PK), student_id (FK), course_id (FK), grade', role: 'Many-to-many relationship with letter grades' }
+    { name: 'students', fields: 'id, name, email, password, department (class_section)', role: 'Enrolled students, roll records, and assigned academic class' },
+    { name: 'faculty', fields: 'id, name, email, password, department (wing)', role: 'Teaching staff, academic wing, and credentials' },
+    { name: 'courses', fields: 'id, name, credits (periods), faculty_id', role: 'School curriculum, weekly periods, and subject teacher' },
+    { name: 'enrollments', fields: 'id, student_id, course_id, grade', role: 'Student report cards, marks, and academic evaluations' }
   ];
 
   return (
     <div className="page-container">
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">About the Project</h1>
-          <p className="page-subtitle">
-            Comprehensive documentation of the Student Management System built for the Full Stack Java Programming curriculum.
-          </p>
+      <div className="school-section-header">
+        <div className="header-title-box">
+          <div className="header-crest-icon">📜</div>
+          <div>
+            <h1 className="school-page-title">School Charter &amp; Architecture</h1>
+            <p className="school-page-subtitle">
+              Academic vision, curriculum syllabus outcomes (LO1 - LO6), and software architecture.
+            </p>
+          </div>
         </div>
       </div>
 
       <div className="about-grid">
-        {/* Project Overview Card */}
-        <div className="about-card col-span-2">
-          <h2>Project Overview</h2>
-          <p>
-            The <strong>Student Management System (SMS)</strong> is an end-to-end multi-tier software project developed to showcase the entire web development lifecycle. From core Object-Oriented principles in Java through database persistence, server-side servlets, client-side scripts, reactive interfaces with React 19, up to cloud-ready RESTful microservices with Spring Boot.
+        {/* School Creed Card */}
+        <div className="school-charter-card col-span-2">
+          <div className="charter-crest-header">
+            <span>🏛️</span>
+            <div>
+              <h2>Greenwood Academy &bull; Institutional Charter</h2>
+              <p className="motto-italic">"Sapientia et Virtus &mdash; Wisdom, Integrity, and Academic Excellence"</p>
+            </div>
+          </div>
+          <p className="charter-text">
+            The Greenwood School Management System is designed to streamline academic operations across all tiers of schooling. From student admissions and roll registries to curriculum subject allocations, teacher coordination, and examination reporting, this portal provides a reliable, secure, and user-friendly experience for administrators, educators, and scholars.
           </p>
-          <div className="tech-tags">
-            <span className="tech-tag">Java 17+</span>
-            <span className="tech-tag">MySQL</span>
-            <span className="tech-tag">JDBC</span>
-            <span className="tech-tag">Servlets & JSP</span>
-            <span className="tech-tag">Apache Tomcat</span>
-            <span className="tech-tag">JavaScript DOM</span>
-            <span className="tech-tag">React 19</span>
-            <span className="tech-tag">Vite</span>
-            <span className="tech-tag">React Router v7</span>
-            <span className="tech-tag">Spring Boot 3</span>
-            <span className="tech-tag">Spring Data JPA</span>
-            <span className="tech-tag">Hibernate</span>
+          <div className="school-creed-badges">
+            <span className="creed-pill">🌟 Founded 1998</span>
+            <span className="creed-pill">🏆 4 School Houses</span>
+            <span className="creed-pill">📚 Comprehensive Syllabus</span>
+            <span className="creed-pill">⚡ Powered by Java &amp; React</span>
           </div>
         </div>
 
         {/* Syllabus Outcomes */}
         <div className="about-card col-span-2">
-          <h2>Syllabus Learning Outcomes (LO1 - LO6)</h2>
+          <h2>Academic &amp; Engineering Learning Outcomes (LO1 &ndash; LO6)</h2>
           <div className="outcome-list">
             {syllabusOutcomes.map((item, idx) => (
               <div key={idx} className="outcome-item">
-                <span className="outcome-badge">{item.code}</span>
+                <span className="school-outcome-badge">{item.code}</span>
                 <div className="outcome-text">
                   <strong>{item.name}</strong>
                   <p>{item.details}</p>
@@ -67,15 +68,15 @@ function About() {
 
         {/* Database Schema */}
         <div className="about-card col-span-2">
-          <h2>Relational Database Schema (MySQL)</h2>
+          <h2>School Relational Database Schema (MySQL)</h2>
           <p className="mb-4">Database: <code>student_management_system</code></p>
-          <div className="table-responsive">
-            <table className="data-table">
+          <div className="school-table-container">
+            <table className="school-data-table">
               <thead>
                 <tr>
                   <th>Table</th>
-                  <th>Columns & Keys</th>
-                  <th>Description</th>
+                  <th>Fields &amp; Relations</th>
+                  <th>School Function</th>
                 </tr>
               </thead>
               <tbody>
@@ -91,22 +92,22 @@ function About() {
           </div>
         </div>
 
-        {/* Quick Launch Guide */}
+        {/* System Commands */}
         <div className="about-card col-span-2">
-          <h2>Execution & Verification Commands</h2>
+          <h2>System Launch Commands</h2>
           <div className="code-block-list">
-            <div className="code-card">
-              <h4>1. Core Java OOP (Phase 1)</h4>
+            <div className="school-code-card">
+              <h4>1. Core Java Domain Model (Phase 1)</h4>
               <pre><code>cd phase1-core-java{'\n'}javac -d . *.java{'\n'}java app.Main</code></pre>
             </div>
 
-            <div className="code-card">
-              <h4>2. React Single Page App (Phase 5)</h4>
+            <div className="school-code-card">
+              <h4>2. React 19 School Portal (Phase 5)</h4>
               <pre><code>cd phase5-react{'\n'}npm install{'\n'}npm run dev</code></pre>
             </div>
 
-            <div className="code-card">
-              <h4>3. Spring Boot REST API (Phase 6)</h4>
+            <div className="school-code-card">
+              <h4>3. Spring Boot REST Microservice (Phase 6)</h4>
               <pre><code>cd phase6-spring-boot{'\n'}.\mvnw.cmd spring-boot:run</code></pre>
             </div>
           </div>

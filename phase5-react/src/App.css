@@ -1,10 +1,43 @@
 /* ==========================================================================
-   App Layout
+   School Theme - App Layout & Top Motto Bar
    ========================================================================== */
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.top-motto-bar {
+  background: var(--school-navy-dark);
+  color: #fef3c7;
+  font-size: 0.775rem;
+  padding: 6px 24px;
+  border-bottom: 1px solid rgba(194, 120, 3, 0.3);
+}
+
+.motto-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.motto-text {
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
+.academic-session {
+  background: rgba(194, 120, 3, 0.25);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: #fde68a;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
 }
 
 .main-content {
@@ -22,22 +55,21 @@
 }
 
 /* ==========================================================================
-   Navbar
+   School Navbar
    ========================================================================== */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background-color: #ffffff;
+  border-bottom: 2px solid var(--border-school);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-container {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,21 +83,18 @@
   text-decoration: none;
 }
 
-.brand-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+.school-crest {
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+  flex-shrink: 0;
 }
 
-.brand-icon svg {
-  width: 24px;
-  height: 24px;
+.crest-svg {
+  width: 100%;
+  height: 100%;
 }
 
 .brand-text {
@@ -73,55 +102,55 @@
   flex-direction: column;
 }
 
-.brand-title {
+.school-name {
+  font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.05em;
+  color: var(--school-navy);
 }
 
-.brand-subtitle {
+.portal-label {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-weight: 600;
+  color: var(--school-gold);
+  letter-spacing: 0.02em;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-muted);
+  background: var(--bg-campus);
   padding: 4px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-school);
 }
 
 .nav-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
-.nav-svg {
-  width: 16px;
-  height: 16px;
+.nav-icon {
+  font-size: 1rem;
 }
 
 .nav-item:hover {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.6);
+  color: var(--school-navy);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .nav-item.active {
-  color: var(--primary);
-  background: var(--bg-surface);
+  color: #ffffff;
+  background: var(--school-navy);
   box-shadow: var(--shadow-sm);
 }
 
@@ -138,20 +167,20 @@
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.775rem;
-  font-weight: 600;
+  font-weight: 700;
   border: 1px solid transparent;
 }
 
 .status-pill.online {
-  background-color: var(--success-light);
+  background-color: #ecfdf5;
   color: #065f46;
   border-color: #a7f3d0;
 }
 
 .status-pill.offline {
-  background-color: var(--warning-light);
+  background-color: var(--school-gold-light);
   color: #92400e;
-  border-color: #fde68a;
+  border-color: var(--school-gold-border);
 }
 
 .status-dot {
@@ -161,21 +190,21 @@
 }
 
 .status-pill.online .status-dot {
-  background-color: var(--success);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background-color: var(--school-forest);
+  box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.2);
 }
 
 .status-pill.offline .status-dot {
-  background-color: var(--warning);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  background-color: var(--school-gold);
+  box-shadow: 0 0 0 3px rgba(194, 120, 3, 0.2);
 }
 
 .btn-icon {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1px solid var(--border-school);
   color: var(--text-muted);
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -185,8 +214,8 @@
 }
 
 .btn-icon:hover {
-  background: var(--bg-muted);
-  color: var(--text-main);
+  background: var(--bg-campus);
+  color: var(--school-navy);
 }
 
 .rotating {
@@ -199,7 +228,7 @@
 }
 
 /* ==========================================================================
-   Buttons & Core Elements
+   School Buttons
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -209,118 +238,215 @@
   padding: 10px 20px;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
 }
 
-.btn-primary {
-  background: var(--primary);
+.btn-school-primary {
+  background: var(--school-navy);
   color: #ffffff;
-  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);
+  border: 1px solid var(--school-navy-light);
+  box-shadow: 0 2px 4px rgba(21, 43, 71, 0.2);
 }
 
-.btn-primary:hover {
-  background: var(--primary-hover);
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
+.btn-school-primary:hover {
+  background: var(--school-navy-dark);
+  border-color: var(--school-gold);
+  color: #fef3c7;
 }
 
-.btn-secondary {
-  background: var(--bg-muted);
-  color: var(--text-main);
-  border-color: var(--border);
+.btn-school-secondary {
+  background: var(--school-gold);
+  color: #ffffff;
+  border: 1px solid var(--school-gold-hover);
 }
 
-.btn-secondary:hover {
-  background: #e2e8f0;
+.btn-school-secondary:hover {
+  background: var(--school-gold-hover);
 }
 
-.btn-outline {
-  background: var(--bg-surface);
-  border-color: var(--border);
-  color: var(--text-main);
+.btn-school-outline {
+  background: #ffffff;
+  border: 1px solid var(--border-strong);
+  color: var(--school-navy);
 }
 
-.btn-outline:hover {
-  background: var(--bg-muted);
-  border-color: var(--border-focus);
+.btn-school-outline:hover {
+  background: var(--bg-campus);
+  border-color: var(--school-navy);
 }
 
 .btn-danger {
-  background: var(--danger);
+  background: var(--school-crimson);
   color: #fff;
 }
 
 .btn-danger:hover {
-  background: var(--danger-hover);
+  background: #7f1d1d;
+}
+
+.btn-secondary {
+  background: var(--bg-accent);
+  color: var(--text-main);
+  border: 1px solid var(--border-school);
+}
+
+.btn-secondary:hover {
+  background: #e5e0d4;
 }
 
 .btn-lg {
-  padding: 14px 28px;
-  font-size: 1rem;
-  border-radius: var(--radius-lg);
+  padding: 14px 24px;
+  font-size: 0.95rem;
 }
 
 .btn-sm {
-  padding: 6px 12px;
-  font-size: 0.775rem;
-  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-size: 0.8rem;
 }
 
 /* ==========================================================================
-   Hero Section & Home Dashboard
+   Blackboard Notice Board (School Feature)
    ========================================================================== */
-.home-dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.blackboard-noticeboard {
+  margin-bottom: 10px;
 }
 
-.hero-section {
+.blackboard-frame {
+  background: linear-gradient(135deg, #4a3425 0%, #301f15 100%);
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 16px rgba(48, 31, 21, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  border: 2px solid #281910;
+}
+
+.blackboard-surface {
+  background-color: var(--school-chalkboard);
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 16px 16px, 100% 28px;
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  color: var(--school-chalk-text);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chalk-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.chalk-pin {
+  font-size: 1.25rem;
+}
+
+.chalk-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: #fef3c7;
+}
+
+.chalk-date {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  color: #a7f3d0;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.chalk-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.notice-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #f0fdf4;
+}
+
+.notice-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.tag-exam { background: #dc2626; color: #fff; }
+.tag-sports { background: #d97706; color: #fff; }
+.tag-event { background: #0284c7; color: #fff; }
+
+/* ==========================================================================
+   School Hero Section
+   ========================================================================== */
+.school-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.school-hero {
   text-align: center;
-  padding: 48px 24px 32px;
+  padding: 32px 16px 20px;
   max-width: 860px;
   margin: 0 auto;
 }
 
-.hero-badge {
+.school-badge-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 16px;
+  padding: 6px 18px;
   border-radius: var(--radius-full);
-  background: var(--primary-light);
-  color: var(--primary-dark);
+  background: var(--school-gold-light);
+  color: #78350f;
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 20px;
-  border: 1px solid rgba(79, 70, 229, 0.15);
+  border: 1px solid var(--school-gold-border);
 }
 
-.hero-title {
-  font-size: 3.25rem;
+.school-hero-title {
+  font-family: var(--font-serif);
+  font-size: 2.85rem;
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: var(--text-main);
-  margin-bottom: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--school-navy);
+  margin-bottom: 16px;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.gold-text {
+  color: var(--school-gold);
 }
 
-.hero-description {
-  font-size: 1.15rem;
+.school-hero-desc {
+  font-size: 1.1rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
 }
 
-.hero-actions {
+.school-hero-actions {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,31 +454,34 @@
   flex-wrap: wrap;
 }
 
-/* Metrics Row */
-.metrics-row {
+/* ==========================================================================
+   School Metrics Grid
+   ========================================================================== */
+.school-metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
 }
 
-.metric-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+.school-stat-card {
+  background: #ffffff;
+  border: 1px solid var(--border-school);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 22px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.metric-card:hover {
+.school-stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
 }
 
-.metric-icon {
+.stat-icon-wrapper {
   width: 54px;
   height: 54px;
   border-radius: var(--radius-md);
@@ -360,37 +489,131 @@
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
+  flex-shrink: 0;
 }
 
-.metric-indigo { background: #eef2ff; }
-.metric-cyan { background: #ecfeff; }
-.metric-emerald { background: #ecfdf5; }
-.metric-purple { background: #f5f3ff; }
+.icon-navy { background: #e0e7ff; }
+.icon-gold { background: #fef3c7; }
+.icon-crimson { background: #fee2e2; }
+.icon-green { background: #dcfce7; }
 
-.metric-data {
+.stat-info {
   display: flex;
   flex-direction: column;
 }
 
-.metric-number {
+.stat-value {
   font-size: 2rem;
   font-weight: 800;
   line-height: 1.1;
-  color: var(--text-main);
+  color: var(--school-navy);
+  font-family: var(--font-serif);
 }
 
-.metric-label {
+.stat-title {
   font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 4px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 2px;
 }
 
-/* Status Banner */
-.status-banner-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
+.stat-sub {
+  font-size: 0.725rem;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   Four School Houses Section
+   ========================================================================== */
+.house-system-section {
+  background: #ffffff;
+  border: 1px solid var(--border-school);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-title-wrap {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--school-navy);
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.houses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.house-card {
+  border: 2px solid;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+  background: var(--bg-parchment);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+
+.house-card:hover {
+  transform: translateY(-3px);
+}
+
+.house-crest {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.house-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.house-motto {
+  font-style: italic;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.house-stats {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  border-top: 1px dashed var(--border-school);
+  padding-top: 8px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   School Sync Banner
+   ========================================================================== */
+.school-sync-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border-school);
+  border-left: 6px solid var(--school-gold);
   border-radius: var(--radius-md);
   padding: 20px 24px;
   display: flex;
@@ -399,528 +622,440 @@
   box-shadow: var(--shadow-sm);
 }
 
-.status-banner-icon {
-  font-size: 2rem;
+.sync-icon {
+  font-size: 2.25rem;
   flex-shrink: 0;
 }
 
-.status-banner-info {
+.sync-details {
   flex: 1;
 }
 
-.status-banner-info h3 {
-  font-size: 1rem;
+.sync-details h3 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
   font-weight: 700;
+  color: var(--school-navy);
   margin-bottom: 4px;
 }
 
-.status-banner-info p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
-
-/* Architecture Section */
-.architecture-section {
-  margin-top: 10px;
-}
-
-.section-heading {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.section-heading h2 {
-  font-size: 1.85rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-}
-
-.section-heading p {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.phases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.phase-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s;
-}
-
-.phase-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-focus);
-}
-
-.phase-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.phase-step {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--primary);
-  background: var(--primary-light);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-}
-
-.phase-badge {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.phase-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.phase-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-/* ==========================================================================
-   Page Headers & Control Panels
-   ========================================================================== */
-.page-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text-main);
-  margin-bottom: 6px;
-}
-
-.page-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  max-width: 650px;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.controls-panel {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: var(--bg-surface);
-  padding: 14px 18px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-}
-
-.search-box {
-  flex: 1;
-  min-width: 260px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search-icon {
-  position: absolute;
-  left: 14px;
-  width: 18px;
-  height: 18px;
-  color: var(--text-subtle);
-  pointer-events: none;
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px 38px 10px 42px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  font-size: 0.875rem;
-  background: var(--bg-muted);
-  color: var(--text-main);
-  outline: none;
-  transition: all 0.2s;
-}
-
-.search-input:focus {
-  background: #fff;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-ring);
-}
-
-.clear-btn {
-  position: absolute;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: var(--text-subtle);
-  cursor: pointer;
-  line-height: 1;
-}
-
-.filter-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.select-dropdown {
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  font-size: 0.875rem;
-  font-weight: 500;
-  background-color: var(--bg-surface);
-  color: var(--text-main);
-  outline: none;
-  cursor: pointer;
-}
-
-.select-dropdown:focus {
-  border-color: var(--primary);
-}
-
-.view-toggle {
-  display: flex;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--bg-muted);
-}
-
-.toggle-btn {
-  background: transparent;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.toggle-btn.active {
-  background: var(--bg-surface);
-  color: var(--primary);
-  box-shadow: var(--shadow-sm);
-}
-
-.meta-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4px;
-}
-
-.results-count {
+.sync-details p {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.text-btn {
-  background: none;
-  border: none;
-  color: var(--primary);
-  font-size: 0.825rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 /* ==========================================================================
-   Student Cards & Grid
+   Section Headers & School Controls
    ========================================================================== */
-.students-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.student-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 18px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.student-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.card-header {
+.school-section-header {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.card-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
+.header-title-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-crest-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--school-gold-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.75rem;
+  border: 1px solid var(--school-gold-border);
   flex-shrink: 0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 
-.card-identity {
+.school-page-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--school-navy);
+}
+
+.school-page-subtitle {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+.school-controls-panel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #ffffff;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-school);
+  box-shadow: var(--shadow-sm);
+}
+
+.school-search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.school-search-input {
+  width: 100%;
+  padding: 10px 38px 10px 42px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-school);
+  font-size: 0.875rem;
+  background: var(--bg-campus);
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.school-search-input:focus {
+  background: #ffffff;
+  border-color: var(--school-navy);
+  box-shadow: 0 0 0 3px rgba(21, 43, 71, 0.1);
+}
+
+.school-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.school-select {
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-school);
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: var(--school-navy);
+  outline: none;
+  cursor: pointer;
+}
+
+.school-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Student ID Cards (Authentic School Pass Design)
+   ========================================================================== */
+.students-id-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.school-id-card {
+  background: #ffffff;
+  border: 2px solid var(--border-school);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.school-id-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--school-gold);
+}
+
+.id-card-top-bar {
+  background: var(--school-navy);
+  color: #ffffff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--school-gold);
+}
+
+.id-school-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #fef3c7;
+}
+
+.id-card-type {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(254, 243, 199, 0.2);
+  color: #fde68a;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.id-card-content {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.id-card-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.id-avatar-frame {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: var(--school-navy-surface);
+  border: 2px solid var(--school-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.id-avatar-initials {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--school-navy);
+}
+
+.id-academic-cap {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1rem;
+}
+
+.id-identity {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.card-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-main);
+.id-student-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--school-navy);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card-id {
+.id-roll-number {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.775rem;
   color: var(--text-muted);
+}
+
+.id-label {
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+.id-details-box {
+  background: var(--bg-campus);
+  border: 1px solid var(--border-school);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.825rem;
+}
+
+.id-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id-field-name {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.775rem;
+}
+
+.id-class-tag {
+  font-weight: 700;
+  color: var(--school-navy);
+  background: #ffffff;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-school);
+}
+
+.id-house-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+}
+
+.id-email-link {
+  color: var(--school-navy);
+  text-decoration: none;
   font-weight: 500;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.id-email-link:hover {
+  text-decoration: underline;
+  color: var(--school-gold);
 }
 
-.card-field {
+.id-card-actions {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--border-school);
+  background: var(--bg-parchment);
+}
+
+.btn-id-action {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
 }
 
-.field-label {
-  font-size: 0.725rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-subtle);
+.btn-id-action:first-child {
+  border-right: 1px solid var(--border-school);
 }
 
-.dept-tag {
-  display: inline-flex;
-  width: fit-content;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 700;
+.btn-id-action.edit:hover {
+  background: var(--school-gold-light);
+  color: #78350f;
 }
 
-.dept-ds { background: #e0e7ff; color: #3730a3; }
-.dept-cs { background: #e0f2fe; color: #0369a1; }
-.dept-ai { background: #fdf2f8; color: #9d174d; }
-.dept-sec { background: #fef3c7; color: #92400e; }
-.dept-default { background: #f1f5f9; color: #475569; }
-
-.card-email {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  transition: color 0.2s;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.card-email:hover {
-  color: var(--primary);
-  text-decoration: underline;
-}
-
-.card-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-top: 1px solid var(--border);
-  padding-top: 14px;
-}
-
-.btn-action {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--bg-surface);
-  transition: all 0.2s;
-}
-
-.btn-action.edit:hover {
-  background: var(--primary-light);
-  color: var(--primary);
-  border-color: #c7d2fe;
-}
-
-.btn-action.delete:hover {
-  background: var(--danger-light);
-  color: var(--danger);
-  border-color: #fecaca;
+.btn-id-action.delete:hover {
+  background: var(--school-crimson-light);
+  color: var(--school-crimson);
 }
 
 /* ==========================================================================
-   Data Table
+   School Register Table View
    ========================================================================== */
-.table-responsive {
-  background: var(--bg-surface);
+.school-table-container {
+  background: #ffffff;
+  border: 1px solid var(--border-school);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
   overflow-x: auto;
   box-shadow: var(--shadow-sm);
 }
 
-.data-table {
+.school-data-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-size: 0.875rem;
 }
 
-.data-table th {
-  background: var(--bg-muted);
+.school-data-table th {
+  background: var(--bg-campus);
   padding: 14px 18px;
+  font-family: var(--font-serif);
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  font-size: 0.725rem;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border);
+  color: var(--school-navy);
+  border-bottom: 2px solid var(--border-school);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
 }
 
-.data-table td {
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--border);
+.school-data-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-school);
   color: var(--text-main);
   vertical-align: middle;
 }
 
-.data-table tr:last-child td {
-  border-bottom: none;
+.school-data-table tr:hover {
+  background: var(--bg-parchment);
 }
 
-.badge-id {
+.roll-badge {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: var(--school-navy);
+  background: var(--school-navy-surface);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
 }
 
-.table-name {
-  font-weight: 600;
+.table-student-name {
+  font-family: var(--font-serif);
+  color: var(--school-navy);
 }
 
-.dept-pill {
-  display: inline-block;
+.class-chip {
+  background: var(--bg-campus);
   padding: 3px 8px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.775rem;
   font-weight: 600;
-  background: var(--bg-muted);
-  color: var(--text-muted);
+  border: 1px solid var(--border-school);
 }
 
-.table-link {
-  color: var(--primary);
+.house-tag {
+  font-weight: 700;
+  font-size: 0.775rem;
+  color: var(--school-gold);
+}
+
+.school-table-link {
+  color: var(--school-navy);
   text-decoration: none;
 }
 
-.table-link:hover {
+.school-table-link:hover {
   text-decoration: underline;
 }
 
-.table-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-edit {
-  background: var(--primary-light);
-  color: var(--primary);
-  border: none;
-  cursor: pointer;
-}
-
-.btn-delete {
-  background: var(--danger-light);
-  color: var(--danger);
-  border: none;
-  cursor: pointer;
-}
-
 /* ==========================================================================
-   Course & Faculty Cards
+   Subject Cards & Faculty Cards
    ========================================================================== */
-.courses-grid,
-.faculty-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.course-card,
-.faculty-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+.school-subject-card,
+.school-faculty-card {
+  background: #ffffff;
+  border: 1px solid var(--border-school);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -928,554 +1063,360 @@
   transition: all 0.2s;
 }
 
-.course-card:hover,
-.faculty-card:hover {
+.school-subject-card:hover,
+.school-faculty-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-color: var(--school-navy);
 }
 
-.course-header {
+.subject-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.course-code {
+.subject-code {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--primary);
-  background: var(--primary-light);
-  padding: 4px 10px;
+  color: var(--school-navy);
+  background: var(--school-navy-surface);
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
 }
 
-.credits-badge {
+.periods-badge {
   font-size: 0.75rem;
   font-weight: 700;
   color: #065f46;
   background: #d1fae5;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: var(--radius-full);
 }
 
-.course-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.3;
+.subject-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--school-navy);
 }
 
-.course-meta {
+.subject-meta-box {
+  background: var(--bg-campus);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  font-size: 0.825rem;
 }
 
-.meta-item {
+.subject-meta-line {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.85rem;
 }
 
-.meta-label {
-  color: var(--text-muted);
+.meta-wing {
+  font-weight: 700;
+  color: var(--school-gold);
 }
 
-.instructor-name {
+.meta-teacher {
+  font-weight: 600;
+  color: var(--school-navy);
+}
+
+/* Faculty Cards */
+.faculty-card-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  color: var(--text-main);
+  gap: 14px;
 }
 
-.faculty-badge-icon {
+.faculty-avatar-circle {
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-md);
-  background: var(--primary-light);
+  border-radius: 50%;
+  background: var(--school-navy-surface);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
+  border: 2px solid var(--school-navy);
+}
+
+.faculty-title-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .faculty-name {
-  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--school-navy);
+}
+
+.faculty-role-pill {
+  font-size: 0.75rem;
   font-weight: 700;
+  color: var(--school-gold);
 }
 
-.faculty-role {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary);
-  margin-top: -8px;
-}
-
-.faculty-detail {
+.faculty-body-details {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  font-size: 0.825rem;
+  border-top: 1px dashed var(--border-school);
+  padding-top: 12px;
 }
 
-.detail-label {
-  font-size: 0.725rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--text-subtle);
-}
-
-.faculty-courses {
+.faculty-row {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subjects-row {
   flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
   margin-top: 4px;
 }
 
-.course-chips {
+.f-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.f-wing-tag {
+  background: var(--school-gold-light);
+  color: #78350f;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.f-email {
+  color: var(--school-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.faculty-chips-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.chip {
-  font-size: 0.75rem;
-  background: var(--bg-muted);
-  color: var(--text-main);
-  padding: 3px 8px;
+.subject-chip {
+  background: var(--bg-campus);
+  border: 1px solid var(--border-school);
+  padding: 2px 8px;
   border-radius: var(--radius-sm);
-  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--school-navy);
+  font-weight: 600;
 }
 
 /* ==========================================================================
-   About Page Components
+   School Charter & About Cards
    ========================================================================== */
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.col-span-2 {
-  grid-column: span 2;
-}
-
-.about-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+.school-charter-card {
+  background: #ffffff;
+  border: 2px solid var(--school-gold);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 32px;
   box-shadow: var(--shadow-sm);
 }
 
-.about-card h2 {
-  font-size: 1.35rem;
-  font-weight: 800;
-  margin-bottom: 14px;
-  color: var(--text-main);
+.charter-crest-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.about-card p {
+.charter-crest-header span {
+  font-size: 2.5rem;
+}
+
+.charter-crest-header h2 {
+  font-family: var(--font-serif);
+  color: var(--school-navy);
+  font-size: 1.4rem;
+}
+
+.motto-italic {
+  font-style: italic;
+  color: var(--school-gold);
+  font-weight: 600;
+}
+
+.charter-text {
+  font-size: 0.975rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-.tech-tags {
+.school-creed-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.tech-tag {
-  background: var(--bg-muted);
-  border: 1px solid var(--border);
+.creed-pill {
+  background: var(--bg-campus);
+  border: 1px solid var(--border-school);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-main);
+  font-weight: 700;
+  color: var(--school-navy);
 }
 
-.outcome-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.outcome-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 14px 18px;
-  background: var(--bg-muted);
-  border-radius: var(--radius-md);
-}
-
-.outcome-badge {
+.school-outcome-badge {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 800;
-  background: var(--primary);
-  color: #fff;
+  background: var(--school-navy);
+  color: #fef3c7;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
 }
 
-.outcome-text strong {
-  font-size: 0.95rem;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.outcome-text p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.code-block-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.code-card {
-  background: #0f172a;
+.school-code-card {
+  background: var(--school-navy-dark);
   color: #f8fafc;
   padding: 16px;
   border-radius: var(--radius-md);
+  border-left: 4px solid var(--school-gold);
 }
 
-.code-card h4 {
+.school-code-card h4 {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #fde68a;
   margin-bottom: 8px;
 }
 
-.code-card pre {
+.school-code-card pre {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   line-height: 1.5;
-  color: #38bdf8;
+  color: #93c5fd;
   overflow-x: auto;
 }
 
 /* ==========================================================================
-   Modals
+   School Modals
    ========================================================================== */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 100;
-}
-
-.modal-card {
-  background: var(--bg-surface);
+.school-modal-card {
+  background: #ffffff;
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 520px;
   box-shadow: var(--shadow-xl);
   overflow: hidden;
+  border: 2px solid var(--border-school);
   animation: modalEnter 0.2s ease-out;
 }
 
-@keyframes modalEnter {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.modal-confirm {
-  text-align: center;
-  padding: 32px 24px;
-}
-
-.confirm-icon {
-  font-size: 3rem;
-  margin-bottom: 12px;
-}
-
-.modal-confirm h2 {
-  font-size: 1.35rem;
-  margin-bottom: 8px;
-}
-
-.modal-confirm p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 24px;
-}
-
-.modal-header {
+.school-modal-header {
+  background: var(--school-navy);
+  color: #ffffff;
+  padding: 18px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  border-bottom: 3px solid var(--school-gold);
+  position: relative;
 }
 
-.modal-header h2 {
+.modal-crest {
+  font-size: 1.75rem;
+}
+
+.school-modal-header h2 {
+  font-family: var(--font-serif);
   font-size: 1.25rem;
-  font-weight: 700;
+  color: #ffffff;
 }
 
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--text-subtle);
-  cursor: pointer;
+.school-modal-header p {
+  font-size: 0.75rem;
+  color: #fef3c7;
 }
 
-.modal-close:hover {
-  color: var(--text-main);
-}
-
-.modal-body {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.form-group input,
-.form-group select {
-  padding: 10px 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  font-size: 0.875rem;
-  color: var(--text-main);
-  background: var(--bg-surface);
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-ring);
-}
-
-.form-row {
-  display: flex;
-  gap: 14px;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.form-error-banner {
-  background: var(--danger-light);
-  color: var(--danger);
-  padding: 10px 14px;
-  border-radius: var(--radius-md);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 16px 24px;
-  background: var(--bg-muted);
-  border-top: 1px solid var(--border);
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-end {
-  justify-content: flex-end;
+.school-modal-header .modal-close {
+  margin-left: auto;
+  color: #fef3c7;
+  font-size: 1.75rem;
 }
 
 /* ==========================================================================
-   Toast Notification
+   School Footer
    ========================================================================== */
-.toast-notification {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 150;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
-  border-radius: var(--radius-md);
-  background: #0f172a;
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 600;
-  box-shadow: var(--shadow-xl);
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.toast-notification.error {
-  background: var(--danger);
-}
-
-.toast-notification.info {
-  background: var(--primary);
-}
-
-/* ==========================================================================
-   States & Empty Views
-   ========================================================================== */
-.empty-state {
-  text-align: center;
-  padding: 64px 20px;
-  background: var(--bg-surface);
-  border-radius: var(--radius-lg);
-  border: 1px dashed var(--border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 4px;
-}
-
-.empty-state h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.empty-state p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  max-width: 420px;
-  margin-bottom: 8px;
-}
-
-.loading-state {
-  text-align: center;
-  padding: 64px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  color: var(--text-muted);
-}
-
-.spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid var(--border);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.footer {
+.school-footer {
   background: #ffffff;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border-school);
   margin-top: auto;
 }
 
-.footer-content {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 48px 24px 32px;
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1.5fr;
-  gap: 36px;
-}
-
-.footer-col h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 14px;
-}
-
-.footer-brand {
+.school-footer-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  color: var(--primary);
-  margin-bottom: 10px;
+  gap: 12px;
+  font-family: var(--font-serif);
+  color: var(--school-navy);
+  font-size: 1.15rem;
+  margin-bottom: 8px;
 }
 
-.footer-desc {
-  font-size: 0.875rem;
+.footer-crest-icon {
+  font-size: 1.85rem;
+}
+
+.footer-motto {
+  font-family: var(--font-sans);
+  font-size: 0.775rem;
+  color: var(--school-gold);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.footer-campus-info {
+  margin-top: 12px;
+  font-size: 0.775rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  background: var(--bg-campus);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
 }
 
-.footer-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer-links li {
-  font-size: 0.825rem;
-  color: var(--text-muted);
-}
-
-.footer-badge {
+.school-session-badge {
   display: inline-block;
   margin-top: 14px;
   padding: 4px 10px;
-  background: var(--primary-light);
-  color: var(--primary-dark);
+  background: var(--school-gold-light);
+  color: #78350f;
   font-size: 0.75rem;
   font-weight: 700;
   border-radius: var(--radius-sm);
-}
-
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding: 20px 24px;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-subtle);
+  border: 1px solid var(--school-gold-border);
 }
 
 /* ==========================================================================
-   Responsive
+   Responsive Overrides
    ========================================================================== */
 @media (max-width: 860px) {
-  .hero-title {
-    font-size: 2.25rem;
+  .school-hero-title {
+    font-size: 2.15rem;
   }
 
   .nav-container {
@@ -1488,16 +1429,12 @@
     justify-content: flex-start;
   }
 
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .school-controls-panel {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .col-span-2 {
-    grid-column: span 1;
+  .school-filter-group {
+    justify-content: space-between;
   }
 }

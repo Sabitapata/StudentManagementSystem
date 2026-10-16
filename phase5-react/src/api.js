@@ -3,29 +3,30 @@
 
 export const API_BASE_URL = 'http://localhost:8081/api/students';
 
+// School-themed initial data
 const INITIAL_STUDENTS = [
-  { id: 1, name: 'Alice Walker', department: 'Data Science', email: 'alice@college.edu', password: 'password123' },
-  { id: 2, name: 'Bob Smith', department: 'Computer Science', email: 'bob@college.edu', password: 'password123' },
-  { id: 3, name: 'Charlie Davis', department: 'Artificial Intelligence', email: 'charlie@college.edu', password: 'password123' },
-  { id: 4, name: 'Diana Prince', department: 'Data Science', email: 'diana@college.edu', password: 'password123' },
-  { id: 5, name: 'Ethan Hunt', department: 'Cyber Security', email: 'ethan@college.edu', password: 'password123' },
-  { id: 6, name: 'Fiona Gallagher', department: 'Information Technology', email: 'fiona@college.edu', password: 'password123' }
+  { id: 1, name: 'Aarav Sharma', department: 'Class 10-A (Science)', email: 'aarav.s@greenwood.edu', password: 'password123', rollNo: 'SCH-1001', house: 'Sapphire' },
+  { id: 2, name: 'Ananya Patel', department: 'Class 12-B (Computer Sci)', email: 'ananya.p@greenwood.edu', password: 'password123', rollNo: 'SCH-1204', house: 'Ruby' },
+  { id: 3, name: 'Rohan Deshmukh', department: 'Class 11-A (Mathematics)', email: 'rohan.d@greenwood.edu', password: 'password123', rollNo: 'SCH-1108', house: 'Emerald' },
+  { id: 4, name: 'Diya Sengupta', department: 'Class 10-B (General)', email: 'diya.s@greenwood.edu', password: 'password123', rollNo: 'SCH-1015', house: 'Topaz' },
+  { id: 5, name: 'Kabir Verma', department: 'Class 12-A (Physics & AI)', email: 'kabir.v@greenwood.edu', password: 'password123', rollNo: 'SCH-1219', house: 'Sapphire' },
+  { id: 6, name: 'Meera Iyer', department: 'Class 9-A (Foundation)', email: 'meera.i@greenwood.edu', password: 'password123', rollNo: 'SCH-0903', house: 'Emerald' }
 ];
 
 const INITIAL_COURSES = [
-  { id: 101, name: 'Full Stack Java Programming', credits: 4, facultyName: 'Dr. Sharma', department: 'Computer Science', code: 'CS-401' },
-  { id: 102, name: 'Database Management Systems', credits: 3, facultyName: 'Prof. Anjali Verma', department: 'Data Science', code: 'DS-302' },
-  { id: 103, name: 'Machine Learning & AI', credits: 4, facultyName: 'Dr. Rajesh Rao', department: 'Artificial Intelligence', code: 'AI-403' },
-  { id: 104, name: 'Web Technologies & React', credits: 3, facultyName: 'Prof. Vikram Sen', department: 'Information Technology', code: 'IT-304' },
-  { id: 105, name: 'Network & Cloud Security', credits: 3, facultyName: 'Dr. Priya Mehta', department: 'Cyber Security', code: 'CY-305' }
+  { id: 101, name: 'Advanced Mathematics & Algebra', credits: 4, facultyName: 'Dr. R. Sharma (HOD)', department: 'Secondary Wing', code: 'MATH-10' },
+  { id: 102, name: 'Physics & Experimental Lab', credits: 4, facultyName: 'Prof. Anjali Verma', department: 'Science Wing', code: 'PHYS-12' },
+  { id: 103, name: 'Computer Applications & Coding', credits: 3, facultyName: 'Mr. Vikram Sen', department: 'Computer Wing', code: 'COMP-11' },
+  { id: 104, name: 'English Literature & Composition', credits: 3, facultyName: 'Mrs. Evelyn Vance', department: 'Language Wing', code: 'ENG-10' },
+  { id: 105, name: 'Environmental Science & Biology', credits: 3, facultyName: 'Dr. Priya Mehta', department: 'Science Wing', code: 'BIO-09' }
 ];
 
 const INITIAL_FACULTY = [
-  { id: 1, name: 'Dr. Sharma', email: 'sharma@college.edu', department: 'Computer Science', role: 'Head of Department', courses: ['Full Stack Java'] },
-  { id: 2, name: 'Prof. Anjali Verma', email: 'anjali@college.edu', department: 'Data Science', role: 'Associate Professor', courses: ['DBMS', 'Data Warehousing'] },
-  { id: 3, name: 'Dr. Rajesh Rao', email: 'rajesh@college.edu', department: 'Artificial Intelligence', role: 'Professor', courses: ['Machine Learning', 'Deep Learning'] },
-  { id: 4, name: 'Prof. Vikram Sen', email: 'vikram@college.edu', department: 'Information Technology', role: 'Assistant Professor', courses: ['Web Technologies', 'React'] },
-  { id: 5, name: 'Dr. Priya Mehta', email: 'priya@college.edu', department: 'Cyber Security', role: 'Associate Professor', courses: ['Network Security', 'Cryptography'] }
+  { id: 1, name: 'Dr. R. Sharma', email: 'r.sharma@greenwood.edu', department: 'Mathematics Wing', role: 'Head of Department & Vice Principal', courses: ['Algebra', 'Calculus'] },
+  { id: 2, name: 'Prof. Anjali Verma', email: 'a.verma@greenwood.edu', department: 'Science Wing', role: 'Senior Physics Teacher', courses: ['Applied Physics', 'Lab Mechanics'] },
+  { id: 3, name: 'Mr. Vikram Sen', email: 'v.sen@greenwood.edu', department: 'Computer Wing', role: 'Lead IT & Programming Faculty', courses: ['Java & Python', 'Web Development'] },
+  { id: 4, name: 'Mrs. Evelyn Vance', email: 'e.vance@greenwood.edu', department: 'Languages Wing', role: 'Senior English Master', courses: ['English Literature', 'Public Speaking'] },
+  { id: 5, name: 'Dr. Priya Mehta', email: 'p.mehta@greenwood.edu', department: 'Life Sciences', role: 'Biology Coordinator', courses: ['Genetics', 'Environmental Studies'] }
 ];
 
 // Helper to check if Spring Boot is reachable
@@ -52,7 +53,6 @@ export async function fetchStudents(backendActive) {
       const res = await fetch(API_BASE_URL);
       if (res.ok) {
         const data = await res.json();
-        // save a copy locally
         localStorage.setItem('sms_students', JSON.stringify(data));
         return data;
       }
