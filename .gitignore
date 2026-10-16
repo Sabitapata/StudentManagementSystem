@@ -1,25 +1,32 @@
 # Compiled Java classes
 *.class
+app/
 target/
 build/
+.mvn/wrapper/maven-wrapper.jar
 
 # Node / React
 node_modules/
 dist/
 .vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Eclipse
 .classpath
 .project
 .settings/
 
-# VS Code
+# VS Code & JetBrains
 .vscode/
+.idea/
+*.iml
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Environment / secrets (never commit real passwords)
+# Secrets & Local Configurations
 application-local.properties
 *.env
