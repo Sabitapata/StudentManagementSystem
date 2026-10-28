@@ -1,10 +1,14 @@
 # 🏫 Greenwood Academy &mdash; School Management System (SMS)
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-student--management--system--flax--five.vercel.app-2ea44f?style=for-the-badge&logo=vercel&logoColor=white)](https://student-management-system-flax-five.vercel.app/)
+
 [![React 19](https://img.shields.io/badge/Frontend-React_19_%2B_Vite-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Spring Boot](https://img.shields.io/badge/Backend-Spring_Boot_3-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Java 17+](https://img.shields.io/badge/Language-Java_17%2B-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![MySQL](https://img.shields.io/badge/Database-MySQL_8.x-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Tomcat](https://img.shields.io/badge/Server-Apache_Tomcat_10-F8DC75?logo=apachetomcat&logoColor=black)](https://tomcat.apache.org/)
+
+> **🌐 Live Website:** [https://student-management-system-flax-five.vercel.app](https://student-management-system-flax-five.vercel.app)
 
 A full-stack, comprehensive **School & Student Management System** built as part of the **Full Stack Java Programming** syllabus (BE Data Science). Featuring an authentic **Academy & Campus Theme** with Oxford Navy and Varsity Gold styling, this project showcases the complete end-to-end software development lifecycle &mdash; from Core Java Object-Oriented domain modeling to MySQL JDBC persistence, Apache Tomcat Servlets, JavaScript DOM manipulation, a reactive single-page school portal in **React 19**, and an enterprise **Spring Boot REST API** backed by Hibernate ORM.
 
