@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Home from './Home';
@@ -29,7 +29,7 @@ function App() {
   }, [testConnection]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="app-layout">
         <Navbar
           isConnected={isConnected}
@@ -49,7 +49,7 @@ function App() {
 
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
